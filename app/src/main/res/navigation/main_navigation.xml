@@ -18,5 +18,12 @@
         android:id="@+id/mainGameFragment"
         android:name="com.example.tabletennis.presentation.MainGameFragment"
         android:label="fragment_main_game"
-        tools:layout="@layout/fragment_main_game" />
+        tools:layout="@layout/fragment_main_game" >
+        <argument
+            android:name="gamerOne"
+            app:argType="string" />
+        <argument
+            android:name="gamerTwo"
+            app:argType="string" />
+    </fragment>
 </navigation>

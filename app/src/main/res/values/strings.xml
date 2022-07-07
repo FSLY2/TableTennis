@@ -3,4 +3,6 @@
     <string name="et_player_name_1">Player 1</string>
     <string name="et_player_name_2">Player 2</string>
     <string name="b_start">Start</string>
+    <string name="buttonUp">UP</string>
+    <string name="buttonDown">Down</string>
 </resources>
