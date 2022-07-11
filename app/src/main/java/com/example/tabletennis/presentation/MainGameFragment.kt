@@ -79,14 +79,14 @@ class MainGameFragment : Fragment() {
         }
     }
 
-    private fun changeScore(event: ScoreEvent, textView: TextView, counter: Int, callback: (Int) -> Unit) {
-        val upScore = when(event) {
+    private fun changeScore(event: ScoreEvent, textView: TextView, counter: Int, callback: () -> Unit) {
+        val newScore = when(event) {
             ScoreEvent.UP -> counter + 1
             ScoreEvent.DOWN -> counter - 1
         }
-        if (upScore in DEFAULT_SCORE..FINAL_SCORE) {
-            textView.text = upScore.toString()
-            callback.invoke(upScore)
+        if (newScore in DEFAULT_SCORE..FINAL_SCORE) {
+            textView.text = newScore.toString()
+            callback.invoke()
         }
         if (counter == FINAL_SCORE){
             // TODO: "Перехід на FinishGameFragment"
