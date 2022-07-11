@@ -7,39 +7,48 @@
     android:layout_height="match_parent"
     tools:context=".presentation.StartGameFragment">
 
-
-    <EditText
-        android:id="@+id/etFirstPlayer"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/et_player_name_1"
-        android:layout_margin="8dp"
-        android:inputType="text"
-        android:autofillHints="name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <EditText
-        android:id="@+id/etSecondPlayer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/et_player_name_2"
-        android:layout_margin="8dp"
-        android:inputType="text"
-        android:autofillHints="name"
-        app:layout_constraintTop_toBottomOf="@id/etFirstPlayer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <Button
-        android:id="@+id/bStartGame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/b_start"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSecondPlayer" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/etFirstPlayer"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints="name"
+            android:hint="@string/et_player_name_1"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSecondPlayer"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:autofillHints="name"
+            android:hint="@string/et_player_name_2"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etFirstPlayer" />
+
+        <Button
+            android:id="@+id/bStartGame"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/b_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etSecondPlayer" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
