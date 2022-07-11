@@ -11,107 +11,89 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="365dp" />
+        app:layout_constraintGuide_percent="0.5"/>
 
-
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/ScoreboardPlayerName"
         android:id="@+id/tvFirstPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Player 1" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/ScoreboardPlayerName"
         android:id="@+id/tvSecondPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Player 2" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/ScoreboardScore"
         android:id="@+id/tvScorePlayerOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toTopOf="@+id/llButtonContainerOne"
+        app:layout_constraintBottom_toTopOf="@+id/bFirstUpScore"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFirstPlayerName"
         tools:text="10" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/ScoreboardScore"
         android:id="@+id/tvScorePlayerTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toTopOf="@+id/llButtonContainerTwo"
+        app:layout_constraintBottom_toTopOf="@+id/bSecondUpScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tvSecondPlayerName"
         tools:text="11" />
 
-    <LinearLayout
-        android:id="@+id/llButtonContainerOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <com.google.android.material.button.MaterialButton
+        style="@style/ScoreboardButton"
+        android:id="@+id/bFirstUpScore"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="@string/buttonUp"
+        app:layout_constraintBottom_toTopOf="@+id/bFirstDownScore"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/ScoreboardButton"
+        android:id="@+id/bFirstDownScore"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="@string/buttonDown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/bFirstUpScore"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:text="@string/buttonUp" />
+    <com.google.android.material.button.MaterialButton
+        style="@style/ScoreboardButton"
+        android:id="@+id/bSecondUpScore"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="@string/buttonUp"
+        app:layout_constraintBottom_toTopOf="@+id/bSecondDownScore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
-        <Button
-            android:id="@+id/bFirstDownScore"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:text="@string/buttonDown" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llButtonContainerTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <com.google.android.material.button.MaterialButton
+        style="@style/ScoreboardButton"
+        android:id="@+id/bSecondDownScore"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="@string/buttonDown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline">
-
-        <Button
-            android:id="@+id/bSecondUpScore"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:text="@string/buttonUp" />
-
-        <Button
-            android:id="@+id/bSecondDownScore"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:text="@string/buttonDown" />
-
-    </LinearLayout>
-
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.tabletennis.databinding.FragmentMainGameBinding
@@ -31,10 +32,11 @@ class MainGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initNames()
+        initScore()
         gameScore()
     }
 
-    //Метод присвоєння імен гравців в textview
+    //Method of assigning player names in textview
     private fun initNames() {
         gamerOne = args.gamerOne
         gamerTwo = args.gamerTwo
@@ -42,38 +44,52 @@ class MainGameFragment : Fragment() {
         binding.tvSecondPlayerName.text = gamerTwo
     }
 
-    //Реалізація кнопок рахунку UP/DOWN для обох гравців
+    //Method of assigning default score in textview
+    private fun initScore() {
+        binding.tvScorePlayerOne.text = firstCounter.toString()
+        binding.tvScorePlayerTwo.text = secondCounter.toString()
+    }
+
+    //Implementation of UP/DOWN score buttons for both players
     private fun gameScore() {
-        // Гравець 1
+        // Player 1
         binding.bFirstUpScore.setOnClickListener {
-            if (firstCounter < FINAL_SCORE) {
+            changeScore(ScoreEvent.UP, binding.tvScorePlayerOne, firstCounter) {
                 firstCounter++
-                binding.tvScorePlayerOne.text = firstCounter.toString()
-            }
-            if (firstCounter == FINAL_SCORE){
-                // TODO: "Перехід на FinishGameFragment"
             }
         }
 
         binding.bFirstDownScore.setOnClickListener {
-            firstCounter--
-            binding.tvScorePlayerOne.text = firstCounter.toString()
+            changeScore(ScoreEvent.DOWN, binding.tvScorePlayerOne, firstCounter) {
+                firstCounter--
+            }
         }
 
-        // Гравець 2
+        // Player 2
         binding.bSecondUpScore.setOnClickListener {
-            if (secondCounter <= FINAL_SCORE) {
+            changeScore(ScoreEvent.UP, binding.tvScorePlayerTwo, secondCounter) {
                 secondCounter++
-                binding.tvScorePlayerTwo.text = secondCounter.toString()
-            }
-            if (secondCounter == FINAL_SCORE){
-                // TODO: "Перехід на FinishGameFragment"
             }
         }
 
         binding.bSecondDownScore.setOnClickListener {
-            secondCounter--
-            binding.tvScorePlayerTwo.text = secondCounter.toString()
+            changeScore(ScoreEvent.DOWN, binding.tvScorePlayerTwo, secondCounter) {
+                secondCounter--
+            }
+        }
+    }
+
+    private fun changeScore(event: ScoreEvent, textView: TextView, counter: Int, callback: (Int) -> Unit) {
+        val upScore = when(event) {
+            ScoreEvent.UP -> counter + 1
+            ScoreEvent.DOWN -> counter - 1
+        }
+        if (upScore in DEFAULT_SCORE..FINAL_SCORE) {
+            textView.text = upScore.toString()
+            callback.invoke(upScore)
+        }
+        if (counter == FINAL_SCORE){
+            // TODO: "Перехід на FinishGameFragment"
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentStartGameBinding
 
 class StartGameFragment : Fragment() {
@@ -26,16 +27,16 @@ class StartGameFragment : Fragment() {
         startGame()
     }
 
-    //Ініціалізація імен та перехід на другий фрагмент
+    //Initialization of names and transition to the second fragment
     private fun startGame() {
         binding.bStartGame.setOnClickListener {
             var gamerOne: String = binding.etFirstPlayer.text.toString()
             var gamerTwo: String = binding.etSecondPlayer.text.toString()
             if (gamerOne.isEmpty()) {
-                gamerOne = DEFAULT_GAMER_ONE
+                gamerOne = getString(R.string.et_player_name_1)
             }
             if (gamerTwo.isEmpty()) {
-                gamerTwo = DEFAULT_GAMER_TWO
+                gamerTwo = getString(R.string.et_player_name_2)
             }
             val action = StartGameFragmentDirections.actionStartGameFragmentToMainGameFragment(
                 gamerOne,
@@ -43,10 +44,5 @@ class StartGameFragment : Fragment() {
             )
             findNavController().navigate(action)
         }
-    }
-
-    companion object {
-        private const val DEFAULT_GAMER_ONE = "Player 1"
-        private const val DEFAULT_GAMER_TWO = "Player 2"
     }
 }
