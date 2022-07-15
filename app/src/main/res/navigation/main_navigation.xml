@@ -25,5 +25,32 @@
         <argument
             android:name="gamerTwo"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mainGameFragment_to_finishGameFragment"
+            app:destination="@id/finishGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishGameFragment"
+        android:name="com.example.tabletennis.presentation.FinishGameFragment"
+        android:label="fragment_finish_game"
+        tools:layout="@layout/fragment_finish_game" >
+        <argument
+            android:name="gamerOne"
+            app:argType="string" />
+        <argument
+            android:name="gamerTwo"
+            app:argType="string" />
+        <argument
+            android:name="firstCounter"
+            app:argType="string" />
+        <argument
+            android:name="secondCounter"
+            app:argType="string" />
+        <argument
+            android:name="winner"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_finishGameFragment_to_startGameFragment"
+            app:destination="@id/startGameFragment" />
     </fragment>
 </navigation>

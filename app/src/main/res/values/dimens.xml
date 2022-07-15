@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_scoreboard_name">25sp</dimen>
+    <dimen name="text_size_scoreboard_score">70sp</dimen>
+    <dimen name="text_size_finish_scoreboard_name">35sp</dimen>
+    <dimen name="text_size_finish_scoreboard_score">70sp</dimen>
+</resources>
