@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.FinishGameFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/finishGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvWinnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvWinnerTitle"
+        app:layout_constraintEnd_toEndOf="@+id/tvWinnerTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvWinnerTitle"
+        tools:text="Player" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvWinnerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_winner_title"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/finishGuideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bSaveResult"
+        style="@style/FinishButtons"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="@string/button_save_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bStartNewGame" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bStartNewGame"
+        style="@style/FinishButtons"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="@string/button_start_new_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/finishGuideLine" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvPlayerNameOne"
+        style="@style/FinishPlayerNames"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/tvWinnerName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvWinnerName"
+        tools:text="Player 1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvPlayerScoreOne"
+        style="@style/FinishScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvPlayerNameOne"
+        app:layout_constraintStart_toStartOf="@+id/tvPlayerNameOne"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayerNameOne"
+        tools:text="10" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvPlayerNameTwo"
+        style="@style/FinishPlayerNames"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvWinnerName"
+        app:layout_constraintTop_toTopOf="@+id/tvWinnerName"
+        tools:text="Player 2" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvPlayerScoreTwo"
+        style="@style/FinishScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/tvPlayerNameTwo"
+        app:layout_constraintStart_toStartOf="@+id/tvPlayerNameTwo"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayerNameTwo"
+        tools:text="11" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

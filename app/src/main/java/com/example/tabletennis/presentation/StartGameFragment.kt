@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentStartGameBinding
 
 class StartGameFragment : Fragment() {
 
     private lateinit var binding: FragmentStartGameBinding
+
+    private val defaultNameOne by lazy { getString(R.string.et_player_name_1) }
+    private val defaultNameTwo by lazy { getString(R.string.et_player_name_2) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,17 +30,19 @@ class StartGameFragment : Fragment() {
         startGame()
     }
 
-    //Ініціалізація імен та перехід на другий фрагмент
+    override fun onResume() {
+        super.onResume()
+        initNames()
+    }
+
+    //Initialization names
     private fun startGame() {
         binding.bStartGame.setOnClickListener {
-            var gamerOne: String = binding.etFirstPlayer.text.toString()
-            var gamerTwo: String = binding.etSecondPlayer.text.toString()
-            if (gamerOne.isEmpty()) {
-                gamerOne = DEFAULT_GAMER_ONE
-            }
-            if (gamerTwo.isEmpty()) {
-                gamerTwo = DEFAULT_GAMER_TWO
-            }
+            val gamerOne = binding.etFirstPlayer.text.defIfEmptyOrNull(defaultNameOne)
+            val gamerTwo = binding.etSecondPlayer.text.defIfEmptyOrNull(defaultNameTwo)
+
+            //Calling the SharedPreferences saving method
+            savingNamesInSharedPref(gamerOne, gamerTwo)
             val action = StartGameFragmentDirections.actionStartGameFragmentToMainGameFragment(
                 gamerOne,
                 gamerTwo
@@ -45,8 +51,21 @@ class StartGameFragment : Fragment() {
         }
     }
 
+    private fun initNames() {
+        binding.etFirstPlayer
+            .setText(Preferences.load(PREF_GAMER_ONE_KEY, defaultNameOne))
+        binding.etSecondPlayer
+            .setText(Preferences.load(PREF_GAMER_TWO_KEY, defaultNameTwo))
+    }
+
+    //SharedPreferences for remembering names
+    private fun savingNamesInSharedPref(gamerOne: String, gamerTwo: String) {
+        Preferences.save(PREF_GAMER_ONE_KEY, gamerOne)
+        Preferences.save(PREF_GAMER_TWO_KEY, gamerTwo)
+    }
+
     companion object {
-        private const val DEFAULT_GAMER_ONE = "Player 1"
-        private const val DEFAULT_GAMER_TWO = "Player 2"
+        private const val PREF_GAMER_ONE_KEY = "gamer_one"
+        private const val PREF_GAMER_TWO_KEY = "gamer_two"
     }
 }
