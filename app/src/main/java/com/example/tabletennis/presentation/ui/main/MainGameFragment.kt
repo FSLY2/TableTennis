@@ -79,28 +79,20 @@ class MainGameFragment : Fragment() {
     private fun initButtonListeners() {
         //Player 1
         binding.bFirstUpScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.UP) { player ->
-                setScoreByPlayer(player)
-            }
+            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.UP)
         }
 
         binding.bFirstDownScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.DOWN) { player ->
-                setScoreByPlayer(player)
-            }
+            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.DOWN)
         }
 
         //Player 2
         binding.bSecondUpScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.UP) { player ->
-                setScoreByPlayer(player)
-            }
+            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.UP)
         }
 
         binding.bSecondDownScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.DOWN) { player ->
-                setScoreByPlayer(player)
-            }
+            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.DOWN)
         }
     }
 

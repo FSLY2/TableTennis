@@ -29,8 +29,7 @@ class GameViewModel: ViewModel() {
 
     fun changePlayerScore(
         player: Players,
-        event: ScoreEvent,
-        callback: (Players) -> Unit
+        event: ScoreEvent
     ) {
         val updPlayer = when(player) {
             is Players.First -> {
@@ -42,16 +41,10 @@ class GameViewModel: ViewModel() {
                 secondPlayer
             }
         }
-        if (updPlayer.score in DEFAULT_SCORE..FINAL_SCORE) {
-            callback.invoke(updPlayer)
-        }
-        //Check for a winner "Player 1"
-        if (firstPlayer.score == FINAL_SCORE) {
-            gameStatusLiveData.postValue(GameStatus.Finish(firstPlayer))
-        }
-        //Check for a winner "Player 2"
-        if (secondPlayer.score == FINAL_SCORE) {
-            gameStatusLiveData.postValue(GameStatus.Finish(secondPlayer))
+        when(updPlayer.score) {
+            in DEFAULT_SCORE until FINAL_SCORE ->
+                gameStatusLiveData.postValue(GameStatus.Resume(updPlayer))
+            FINAL_SCORE -> gameStatusLiveData.postValue(GameStatus.Finish(updPlayer))
         }
     }
 
