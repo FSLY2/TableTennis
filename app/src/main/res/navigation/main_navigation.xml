@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startGameFragment"
-        android:name="com.example.tabletennis.presentation.StartGameFragment"
+        android:name="com.example.tabletennis.presentation.ui.StartGameFragment"
         android:label="fragment_start_game"
         tools:layout="@layout/fragment_start_game" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainGameFragment"
-        android:name="com.example.tabletennis.presentation.MainGameFragment"
+        android:name="com.example.tabletennis.presentation.ui.main.MainGameFragment"
         android:label="fragment_main_game"
         tools:layout="@layout/fragment_main_game" >
         <argument
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/finishGameFragment"
-        android:name="com.example.tabletennis.presentation.FinishGameFragment"
+        android:name="com.example.tabletennis.presentation.ui.FinishGameFragment"
         android:label="fragment_finish_game"
         tools:layout="@layout/fragment_finish_game" >
         <argument

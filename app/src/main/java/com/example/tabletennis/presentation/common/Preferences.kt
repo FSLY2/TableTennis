@@ -1,4 +1,4 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.presentation.common
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -85,6 +85,6 @@ object Preferences {
     }
 
     fun cancel(){
-        pref?.edit()?.clear()?.apply()
+        pref?.edit()?.clear()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentStartGameBinding
+import com.example.tabletennis.presentation.common.Preferences
+import com.example.tabletennis.presentation.common.defIfEmptyOrNull
 
 class StartGameFragment : Fragment() {
 
@@ -43,11 +45,16 @@ class StartGameFragment : Fragment() {
 
             //Calling the SharedPreferences saving method
             savingNamesInSharedPref(gamerOne, gamerTwo)
-            val action = StartGameFragmentDirections.actionStartGameFragmentToMainGameFragment(
-                gamerOne,
-                gamerTwo
-            )
-            findNavController().navigate(action)
+            val action =
+                StartGameFragmentDirections.actionStartGameFragmentToMainGameFragment(
+                    gamerOne,
+                    gamerTwo
+                )
+            with(findNavController()) {
+                currentDestination?.getAction(action.actionId)?.let {
+                    navigate(action)
+                }
+            }
         }
     }
 

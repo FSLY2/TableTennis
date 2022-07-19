@@ -1,14 +1,17 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.presentation.ui.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.tabletennis.databinding.FragmentMainGameBinding
+import com.example.tabletennis.presentation.common.ScoreEvent
 
 class MainGameFragment : Fragment() {
 
@@ -23,6 +26,17 @@ class MainGameFragment : Fragment() {
     private var firstCounter: Int = DEFAULT_SCORE
     private var secondCounter: Int = DEFAULT_SCORE
 
+    private val backDialog: AlertDialog by lazy {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Exit")
+            .setMessage("Are you sure you want to go out?")
+            .setPositiveButton("Yes") { _,_ ->
+                findNavController().popBackStack()
+            }.setNegativeButton("No") { dialog,_ ->
+                dialog.cancel()
+            }.create()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +48,7 @@ class MainGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initOnBackPressCallback()
         initNames()
         initScore()
         gameScore()
@@ -111,14 +126,21 @@ class MainGameFragment : Fragment() {
 
     //Method of transition to FinishGameFragment
     private fun transitionToFinishFragment(winner: String){
-        val action = MainGameFragmentDirections.actionMainGameFragmentToFinishGameFragment(
-            gamerOne,
-            gamerTwo,
-            firstCounter.toString(),
-            secondCounter.toString(),
-            winner
-        )
+        val action =
+            MainGameFragmentDirections.actionMainGameFragmentToFinishGameFragment(
+                gamerOne,
+                gamerTwo,
+                firstCounter.toString(),
+                secondCounter.toString(),
+                winner
+            )
         findNavController().navigate(action)
+    }
+
+    private fun initOnBackPressCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            backDialog.show()
+        }
     }
 
     companion object {

@@ -1,8 +1,9 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tabletennis.R
+import com.example.tabletennis.presentation.common.Preferences
 
 class MainActivity : AppCompatActivity() {
 

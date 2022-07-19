@@ -1,4 +1,4 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.presentation.common
 
 import android.text.Editable
 
