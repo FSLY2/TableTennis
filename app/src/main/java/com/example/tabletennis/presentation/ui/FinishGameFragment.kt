@@ -12,7 +12,7 @@ import com.example.tabletennis.databinding.FragmentFinishGameBinding
 class FinishGameFragment : Fragment() {
 
     private lateinit var binding: FragmentFinishGameBinding
-    private val args: com.example.tabletennis.presentation.FinishGameFragmentArgs by navArgs()
+    private val args: FinishGameFragmentArgs by navArgs()
 
     private lateinit var gamerOne: String
     private lateinit var gamerTwo: String
@@ -52,7 +52,7 @@ class FinishGameFragment : Fragment() {
     private fun startNewGame(){
         binding.bStartNewGame.setOnClickListener{
             val action =
-                com.example.tabletennis.presentation.FinishGameFragmentDirections.actionFinishGameFragmentToStartGameFragment()
+                FinishGameFragmentDirections.actionFinishGameFragmentToStartGameFragment()
             findNavController().navigate(action)
         }
     }
