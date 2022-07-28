@@ -1,15 +1,16 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentStartGameBinding
+import com.example.tabletennis.common.Preferences
+import com.example.tabletennis.common.defIfEmptyOrNull
 
-class StartGameFragment : Fragment() {
+class StartGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentStartGameBinding
 

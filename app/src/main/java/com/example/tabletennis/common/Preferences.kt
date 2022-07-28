@@ -1,4 +1,4 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.common
 
 import android.content.Context
 import android.content.SharedPreferences

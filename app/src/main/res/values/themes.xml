@@ -47,4 +47,14 @@
         <item name="android:textSize">@dimen/text_size_finish_scoreboard_score</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="CardResScoreNames">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="CardResScore">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginStart">6dp</item>
+    </style>
 </resources>

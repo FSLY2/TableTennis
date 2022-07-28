@@ -4,4 +4,7 @@
     <dimen name="text_size_scoreboard_score">70sp</dimen>
     <dimen name="text_size_finish_scoreboard_name">35sp</dimen>
     <dimen name="text_size_finish_scoreboard_score">70sp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="card_margin">2dp</dimen>
 </resources>

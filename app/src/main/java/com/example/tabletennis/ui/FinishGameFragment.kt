@@ -1,18 +1,24 @@
-package com.example.tabletennis.presentation
+package com.example.tabletennis.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.activity.addCallback
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.tabletennis.common.MyViewModelFactory
 import com.example.tabletennis.databinding.FragmentFinishGameBinding
+import com.example.tabletennis.data.ScoreDbEntity
 
-class FinishGameFragment : Fragment() {
+class FinishGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinishGameBinding
     private val args: FinishGameFragmentArgs by navArgs()
+    private val dbViewModel: DatabaseViewModel by viewModels{
+        MyViewModelFactory(requireContext())
+    }
 
     private lateinit var gamerOne: String
     private lateinit var gamerTwo: String
@@ -34,6 +40,8 @@ class FinishGameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initData()
         startNewGame()
+        saveResult()
+        initOnBackPressCallback()
     }
 
     private fun initData() {
@@ -49,9 +57,32 @@ class FinishGameFragment : Fragment() {
         binding.tvPlayerScoreTwo.text = secondCounter
     }
 
+    private fun initOnBackPressCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+            findNavController().popBackStack()
+        }
+    }
+
     private fun startNewGame(){
         binding.bStartNewGame.setOnClickListener{
             val action = FinishGameFragmentDirections.actionFinishGameFragmentToStartGameFragment()
+            findNavController().navigate(action)
+        }
+    }
+    
+    private fun saveResult() {
+        val resultGameList = ScoreDbEntity(
+            pNameOne = gamerOne,
+            pNameTwo = gamerTwo,
+            winner = winner,
+            pScoreOne = firstCounter,
+            pScoreTwo = secondCounter
+        )
+
+        binding.bSaveResult.setOnClickListener {
+            dbViewModel.insert(resultGameList)
+            val action = FinishGameFragmentDirections
+                .actionFinishGameFragmentToResultGameFragment()
             findNavController().navigate(action)
         }
     }
