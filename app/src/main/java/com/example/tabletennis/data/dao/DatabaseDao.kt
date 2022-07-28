@@ -1,8 +1,10 @@
 package com.example.tabletennis.data.dao
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
-import com.example.tabletennis.models.ScoreDbEntity
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import com.example.tabletennis.data.ScoreDbEntity
 
 @Dao
 interface DatabaseDao {
@@ -14,5 +16,5 @@ interface DatabaseDao {
     fun delete(scoreDbEntity: ScoreDbEntity)
 
     @Query("SELECT * from game_table")
-    fun getAllData(): LiveData<List<ScoreDbEntity>>
+    fun getAllData(): List<ScoreDbEntity>
 }

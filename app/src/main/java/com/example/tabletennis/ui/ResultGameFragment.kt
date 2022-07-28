@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tabletennis.common.MyViewModelFactory
 import com.example.tabletennis.data.GameResultAdapter
 import com.example.tabletennis.databinding.FragmentResultGameBinding
 
 class ResultGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentResultGameBinding
-    private val dbViewModel: DatabaseViewModel by viewModels()
+    private val dbViewModel: DatabaseViewModel by viewModels{
+        MyViewModelFactory(requireContext())
+    }
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: GameResultAdapter
+    private val adapter = GameResultAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,14 +32,18 @@ class ResultGameFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        initObservers()
+        dbViewModel.getAllResults()
     }
 
-    //Init Database, RecyclerView, Adapter
+    //RecyclerView Decorator
     private fun init() {
-        dbViewModel.initDatabase()
-        val gameResult = dbViewModel.getAllResults()
-        recyclerView = binding.rvSavedResults
-        adapter = GameResultAdapter(gameResult)
-        recyclerView.adapter = adapter
+        binding.rvSavedResults.adapter = adapter
+    }
+
+    private fun initObservers() {
+        dbViewModel.allResults.observe(viewLifecycleOwner) {
+            adapter.initList(it)
+        }
     }
 }

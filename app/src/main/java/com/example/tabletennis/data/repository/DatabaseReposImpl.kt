@@ -1,21 +1,19 @@
 package com.example.tabletennis.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.tabletennis.data.dao.DatabaseDao
-import com.example.tabletennis.models.ScoreDbEntity
+import com.example.tabletennis.data.ScoreDbEntity
 
 class DatabaseReposImpl(private val dataBaseDao: DatabaseDao): DatabaseRepository {
 
-    override val allGameResults: LiveData<List<ScoreDbEntity>>
-        get() = dataBaseDao.getAllData()
-
-    override fun insertGameData(scoreDbEntity: ScoreDbEntity, onSuccess: () -> Unit) {
-        dataBaseDao.insert(scoreDbEntity)
-        onSuccess()
+    override suspend fun allGameResults(): List<ScoreDbEntity> {
+        return dataBaseDao.getAllData()
     }
 
-    override fun deleteGameData(scoreDbEntity: ScoreDbEntity, onSuccess: () -> Unit) {
+    override suspend fun insertGameData(scoreDbEntity: ScoreDbEntity) {
+        dataBaseDao.insert(scoreDbEntity)
+    }
+
+    override suspend fun deleteGameData(scoreDbEntity: ScoreDbEntity) {
         dataBaseDao.delete(scoreDbEntity)
-        onSuccess()
     }
 }

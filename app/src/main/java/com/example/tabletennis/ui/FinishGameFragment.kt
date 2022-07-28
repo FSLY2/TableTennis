@@ -8,13 +8,17 @@ import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.tabletennis.common.MyViewModelFactory
 import com.example.tabletennis.databinding.FragmentFinishGameBinding
+import com.example.tabletennis.data.ScoreDbEntity
 
 class FinishGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinishGameBinding
     private val args: FinishGameFragmentArgs by navArgs()
-    private val dbViewModel: DatabaseViewModel by viewModels()
+    private val dbViewModel: DatabaseViewModel by viewModels{
+        MyViewModelFactory(requireContext())
+    }
 
     private lateinit var gamerOne: String
     private lateinit var gamerTwo: String
@@ -67,12 +71,12 @@ class FinishGameFragment : BaseFragment() {
     }
     
     private fun saveResult() {
-        val resultGameList = mutableListOf<String>(
-            gamerOne,
-            gamerTwo,
-            winner,
-            firstCounter,
-            secondCounter
+        val resultGameList = ScoreDbEntity(
+            pNameOne = gamerOne,
+            pNameTwo = gamerTwo,
+            winner = winner,
+            pScoreOne = firstCounter,
+            pScoreTwo = secondCounter
         )
 
         binding.bSaveResult.setOnClickListener {
