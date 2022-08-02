@@ -18,6 +18,13 @@ class DatabaseViewModel(private val repository: DatabaseRepository) : ViewModel(
     fun insert(scoreDbEntity: ScoreDbEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertGameData(scoreDbEntity)
+            _allResults.postValue(repository.allGameResults())
+        }
+    }
+
+    fun deleteItem(scoreDbEntity: ScoreDbEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteGameData(scoreDbEntity)
         }
     }
 

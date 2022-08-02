@@ -11,6 +11,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.tabletennis.common.MyViewModelFactory
 import com.example.tabletennis.databinding.FragmentFinishGameBinding
 import com.example.tabletennis.data.ScoreDbEntity
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class FinishGameFragment : BaseFragment() {
 
@@ -71,7 +75,13 @@ class FinishGameFragment : BaseFragment() {
     }
     
     private fun saveResult() {
+
+        val now = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
+        val currentDate = formatter.format(now)
+
         val resultGameList = ScoreDbEntity(
+            date = currentDate,
             pNameOne = gamerOne,
             pNameTwo = gamerTwo,
             winner = winner,
