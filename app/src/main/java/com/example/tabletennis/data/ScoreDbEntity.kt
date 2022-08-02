@@ -12,8 +12,8 @@ data class ScoreDbEntity(
     @ColumnInfo(name = "game_id")
     var gameId: Int? = null,
 
-//    @ColumnInfo(name = "date")
-//    var date: Int,
+    @ColumnInfo(name = "date")
+    var date: String,
 
     @ColumnInfo(name = "first_player")
     val pNameOne: String,
