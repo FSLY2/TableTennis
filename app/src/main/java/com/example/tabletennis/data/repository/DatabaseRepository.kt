@@ -1,10 +1,10 @@
 package com.example.tabletennis.data.repository
 
-import com.example.tabletennis.data.ScoreDbEntity
+import com.example.tabletennis.models.GameDetails
 
 interface DatabaseRepository {
 
-    suspend fun allGameResults(): List<ScoreDbEntity>
-    suspend fun insertGameData(scoreDbEntity: ScoreDbEntity)
-    suspend fun deleteGameData(scoreDbEntity: ScoreDbEntity)
+    suspend fun getAllGameData(): List<GameDetails>
+    suspend fun insertGameData(gameDetails: GameDetails)
+    suspend fun deleteGameData(id: Int)
 }

@@ -100,4 +100,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+    <ImageView
+        android:id="@+id/ivFeedOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_feed_circle"
+        android:visibility="invisible"
+        android:contentDescription="@string/feed_ball_image"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tvScorePlayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFirstPlayerName" />
+
+    <ImageView
+        android:id="@+id/ivFeedTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_feed_circle"
+        android:visibility="invisible"
+        android:contentDescription="@string/feed_ball_image"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/tvScorePlayerTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tvSecondPlayerName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

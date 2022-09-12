@@ -10,17 +10,22 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.tabletennis.R
+import com.example.tabletennis.common.PlayerNumber
+import com.example.tabletennis.common.invisible
+import com.example.tabletennis.common.visible
 import com.example.tabletennis.databinding.FragmentMainGameBinding
 import com.example.tabletennis.models.GameStatus
 import com.example.tabletennis.models.Players
 import com.example.tabletennis.models.ScoreEvent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMainGameBinding
     private val args: MainGameFragmentArgs by navArgs()
     private val viewModel: MainViewModel by viewModels()
-    
+
     private val backDialog: AlertDialog by lazy { createAlertDialog() }
 
     override fun onCreateView(
@@ -35,33 +40,49 @@ class MainGameFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initGame()
-        initPlayers()
         initButtonListeners()
+        initPlayers()
         initOnBackPressCallback()
+    }
+
+    private fun initGame() {
+        initObservers()
+        viewModel.initGameDetails()
     }
 
     //Method of assigning player names in MainViewModel
     private fun initPlayers() {
-        with(args) {
-            viewModel.initPlayers(gamerOne, gamerTwo)
-        }
+        binding.tvFirstPlayerName.text = args.gamerOne
+        binding.tvSecondPlayerName.text = args.gamerTwo
+        val gamerOne = args.gamerOne
+        val gamerTwo = args.gamerTwo
+        viewModel.setNameForGamer(gamerOne, gamerTwo)
     }
 
-    private fun initGame() {
+    private fun initObservers() {
         viewModel.gameStatus.observe(viewLifecycleOwner) { status ->
-            when(status) {
+            when (status) {
                 is GameStatus.Init -> {
-                    with(status) {
-                        binding.tvFirstPlayerName.text = firstPlayer.name
-                        binding.tvSecondPlayerName.text = secondPlayer.name
+                    initPlayers()
+                    with(status.gameDetail) {
                         setScoreByPlayer(firstPlayer)
                         setScoreByPlayer(secondPlayer)
                     }
                 }
                 is GameStatus.Resume -> {
-                    setScoreByPlayer(status.player)
+                    with(status.gameDetail) {
+                        setScoreByPlayer(firstPlayer)
+                        setScoreByPlayer(secondPlayer)
+                        feed?.let { changeFeedBallVisibility(it) }
+                    }
                 }
-                is GameStatus.Finish -> transitionToFinishFragment(status.winner)
+                //Saving results and transition to FinishGameFragment
+                is GameStatus.Finish -> {
+                    viewModel.saveGame(status.gameDetail)
+                    val action = MainGameFragmentDirections
+                        .actionMainGameFragmentToFinishGameFragment(status.gameDetail)
+                    findNavController().navigate(action)
+                }
                 is GameStatus.Cancel -> {
                     findNavController().popBackStack()
                 }
@@ -69,43 +90,45 @@ class MainGameFragment : BaseFragment() {
         }
     }
 
+    //Implementation UP/DOWN score buttons for each player
+    private fun initButtonListeners() {
+        //Player 1
+        binding.bFirstUpScore.setOnClickListener {
+            viewModel.changePlayerScore(PlayerNumber.FIRST, ScoreEvent.UP)
+        }
+        binding.bFirstDownScore.setOnClickListener {
+            viewModel.changePlayerScore(PlayerNumber.FIRST, ScoreEvent.DOWN, false)
+        }
+
+        //Player 2
+        binding.bSecondUpScore.setOnClickListener {
+            viewModel.changePlayerScore(PlayerNumber.SECOND, ScoreEvent.UP)
+        }
+        binding.bSecondDownScore.setOnClickListener {
+            viewModel.changePlayerScore(PlayerNumber.SECOND, ScoreEvent.DOWN, false)
+        }
+    }
+
     //Method of assigning score in textview
     private fun setScoreByPlayer(players: Players) {
-        when(players) {
+        when (players) {
             is Players.First -> binding.tvScorePlayerOne
             is Players.Second -> binding.tvScorePlayerTwo
         }.text = players.score.toString()
     }
 
-    //Implementation UP/DOWN score buttons for each player
-    private fun initButtonListeners() {
-        //Player 1
-        binding.bFirstUpScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.UP)
+    //Method of assigning feed ball in imageview
+    private fun changeFeedBallVisibility(feed: PlayerNumber) {
+        when (feed) {
+            PlayerNumber.FIRST -> {
+                binding.ivFeedOne.visible()
+                binding.ivFeedTwo.invisible()
+            }
+            PlayerNumber.SECOND -> {
+                binding.ivFeedOne.invisible()
+                binding.ivFeedTwo.visible()
+            }
         }
-        binding.bFirstDownScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.firstPlayer, ScoreEvent.DOWN)
-        }
-
-        //Player 2
-        binding.bSecondUpScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.UP)
-        }
-        binding.bSecondDownScore.setOnClickListener {
-            viewModel.changePlayerScore(viewModel.secondPlayer, ScoreEvent.DOWN)
-        }
-    }
-
-    //Method of transition to FinishGameFragment
-    private fun transitionToFinishFragment(winner: Players) {
-        val action = MainGameFragmentDirections.actionMainGameFragmentToFinishGameFragment(
-            viewModel.firstPlayer.name,
-            viewModel.secondPlayer.name,
-            viewModel.firstPlayer.score.toString(),
-            viewModel.secondPlayer.score.toString(),
-            winner.name
-        )
-        findNavController().navigate(action)
     }
 
     //AlertDialog creation method

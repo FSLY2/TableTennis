@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvResWinnerTitle"
-            tools:text="FOXYSLY:" />
+            tools:text="FOXYSLY" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvResPlayerNameTwo"
@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvResPlayerNameOne"
-            tools:text="SLY:" />
+            app:layout_constraintTop_toBottomOf="@+id/tvResPlayerNameOne"
+            tools:text="SLY" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvResWinner"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/tvResPlayerNameTwo"
             app:layout_constraintTop_toBottomOf="@id/tvResPlayerNameOne"
-            tools:text="9" />
+            tools:text="5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
