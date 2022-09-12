@@ -36,31 +36,22 @@
         android:name="com.example.tabletennis.ui.FinishGameFragment"
         android:label="fragment_finish_game"
         tools:layout="@layout/fragment_finish_game" >
-        <argument
-            android:name="gamerOne"
-            app:argType="string" />
-        <argument
-            android:name="gamerTwo"
-            app:argType="string" />
-        <argument
-            android:name="firstCounter"
-            app:argType="string" />
-        <argument
-            android:name="secondCounter"
-            app:argType="string" />
-        <argument
-            android:name="winner"
-            app:argType="string" />
         <action
             android:id="@+id/action_finishGameFragment_to_startGameFragment"
             app:destination="@id/startGameFragment" />
         <action
             android:id="@+id/action_finishGameFragment_to_resultGameFragment"
-            app:destination="@id/resultGameFragment" />
+            app:destination="@id/resultGameFragment"
+            app:popUpTo="@id/finishGameFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="gameDetail"
+            app:argType="com.example.tabletennis.models.GameDetails" />
     </fragment>
     <fragment
         android:id="@+id/resultGameFragment"
         android:name="com.example.tabletennis.ui.ResultGameFragment"
         android:label="fragment_result_game"
-        tools:layout="@layout/fragment_result_game" />
+        tools:layout="@layout/fragment_result_game" >
+    </fragment>
 </navigation>

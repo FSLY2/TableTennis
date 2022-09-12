@@ -1,8 +1,8 @@
 package com.example.tabletennis.models
 
 sealed class GameStatus {
-    class Init(val firstPlayer: Players.First, val secondPlayer: Players.Second): GameStatus()
-    class Resume(val player: Players): GameStatus()
-    class Finish(val winner: Players): GameStatus()
+    class Init(val gameDetail: GameDetails): GameStatus()
+    class Resume(val gameDetail: GameDetails): GameStatus()
+    class Finish(val gameDetail: GameDetails): GameStatus()
     object Cancel: GameStatus()
 }

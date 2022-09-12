@@ -8,10 +8,9 @@ import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.tabletennis.common.MyViewModelFactory
+import com.example.tabletennis.common.PlayerNumber
+import com.example.tabletennis.data.entites.ScoreDbEntity
 import com.example.tabletennis.databinding.FragmentFinishGameBinding
-import com.example.tabletennis.data.ScoreDbEntity
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -20,16 +19,7 @@ class FinishGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinishGameBinding
     private val args: FinishGameFragmentArgs by navArgs()
-    private val dbViewModel: DatabaseViewModel by viewModels{
-        MyViewModelFactory(requireContext())
-    }
-
-    private lateinit var gamerOne: String
-    private lateinit var gamerTwo: String
-    private lateinit var winner: String
-
-    private lateinit var firstCounter: String
-    private lateinit var secondCounter: String
+    private val dbViewModel: DatabaseViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,23 +32,30 @@ class FinishGameFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(args.gameDetail.winner) {
+            setWinnerName(this)
+        }
         initData()
         startNewGame()
-        saveResult()
+        transitionToResultGameFragment()
         initOnBackPressCallback()
     }
 
     private fun initData() {
-        gamerOne = args.gamerOne
-        gamerTwo = args.gamerTwo
-        winner = args.winner
-        firstCounter = args.firstCounter
-        secondCounter = args.secondCounter
-        binding.tvWinnerName.text = winner
-        binding.tvPlayerNameOne.text = gamerOne
-        binding.tvPlayerNameTwo.text = gamerTwo
-        binding.tvPlayerScoreOne.text = firstCounter
-        binding.tvPlayerScoreTwo.text = secondCounter
+        binding.tvPlayerNameOne.text = args.gameDetail.firstPlayer.pName
+        binding.tvPlayerNameTwo.text = args.gameDetail.secondPlayer.pName
+        binding.tvPlayerScoreOne.text = args.gameDetail.firstPlayer.score.toString()
+        binding.tvPlayerScoreTwo.text = args.gameDetail.secondPlayer.score.toString()
+    }
+
+    private fun setWinnerName(winner: PlayerNumber?) {
+        winner?.let {
+            val name = when(it) {
+                PlayerNumber.FIRST -> args.gameDetail.firstPlayer.pName
+                PlayerNumber.SECOND -> args.gameDetail.secondPlayer.pName
+            }
+            binding.tvWinnerName.text = name
+        }
     }
 
     private fun initOnBackPressCallback() {
@@ -74,23 +71,8 @@ class FinishGameFragment : BaseFragment() {
         }
     }
     
-    private fun saveResult() {
-
-        val now = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
-        val currentDate = formatter.format(now)
-
-        val resultGameList = ScoreDbEntity(
-            date = currentDate,
-            pNameOne = gamerOne,
-            pNameTwo = gamerTwo,
-            winner = winner,
-            pScoreOne = firstCounter,
-            pScoreTwo = secondCounter
-        )
-
+    private fun transitionToResultGameFragment() {
         binding.bSaveResult.setOnClickListener {
-            dbViewModel.insert(resultGameList)
             val action = FinishGameFragmentDirections
                 .actionFinishGameFragmentToResultGameFragment()
             findNavController().navigate(action)

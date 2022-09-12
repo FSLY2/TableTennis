@@ -5,32 +5,36 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tabletennis.data.repository.DatabaseRepository
-import com.example.tabletennis.data.ScoreDbEntity
+import com.example.tabletennis.models.GameDetails
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DatabaseViewModel(private val repository: DatabaseRepository) : ViewModel() {
+@HiltViewModel
+class DatabaseViewModel
+@Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
 
-    private val _allResults = MutableLiveData<List<ScoreDbEntity>>()
-    val allResults: LiveData<List<ScoreDbEntity>>
+    private val _allResults = MutableLiveData<List<GameDetails>>()
+    val allResults: LiveData<List<GameDetails>>
         get() = _allResults
 
-    fun insert(scoreDbEntity: ScoreDbEntity) {
+    fun insert(gameDetails: GameDetails) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertGameData(scoreDbEntity)
-            _allResults.postValue(repository.allGameResults())
+            repository.insertGameData(gameDetails)
+//            _allResults.postValue(repository.getAllGameData())
         }
     }
 
-    fun deleteItem(scoreDbEntity: ScoreDbEntity) {
+    fun deleteItem(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteGameData(scoreDbEntity)
+            repository.deleteGameData(id)
         }
     }
 
     fun getAllResults() {
         viewModelScope.launch(Dispatchers.IO) {
-            _allResults.postValue(repository.allGameResults())
+            _allResults.postValue(repository.getAllGameData())
         }
     }
 }

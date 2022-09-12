@@ -4,23 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
 import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tabletennis.common.MyViewModelFactory
-import com.example.tabletennis.data.GameResultAdapter
+import com.example.tabletennis.common.PlayerNumber
 import com.example.tabletennis.databinding.FragmentResultGameBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ResultGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentResultGameBinding
-    private val dbViewModel: DatabaseViewModel by viewModels{
-        MyViewModelFactory(requireContext())
-    }
+    private val dbViewModel: DatabaseViewModel by viewModels()
 
     private val adapter = GameResultAdapter()
 
@@ -39,9 +42,16 @@ class ResultGameFragment : BaseFragment() {
         initObservers()
         dbViewModel.getAllResults()
         swipeToDelete()
+        initOnBackPressCallback()
     }
 
-    //RecyclerView Decorator
+    private fun initOnBackPressCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
+    }
+
+    //RecyclerView
     private fun init() {
         binding.rvSavedResults.adapter = adapter
     }
@@ -68,7 +78,7 @@ class ResultGameFragment : BaseFragment() {
                 val item = adapter.getItemByPosition(position)
                 if (item != null) {
                     adapter.deleteItem(item)
-                    dbViewModel.deleteItem(item)
+                    dbViewModel.deleteItem(item.id)
                     Snackbar.make(
                         requireView(),
                         "Successfully deleted item",
@@ -76,6 +86,7 @@ class ResultGameFragment : BaseFragment() {
                     ).apply {
                         setAction("Undo") {
                             dbViewModel.insert(item)
+                            adapter.setItem(item)
                         }
                         show()
                     }

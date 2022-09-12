@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentStartGameBinding
 import com.example.tabletennis.common.Preferences
 import com.example.tabletennis.common.defIfEmptyOrNull
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartGameFragment : BaseFragment() {
 
     private lateinit var binding: FragmentStartGameBinding
+    private val viewModel: MainViewModel by viewModels()
 
     private val defaultNameOne by lazy { getString(R.string.et_player_name_1) }
     private val defaultNameTwo by lazy { getString(R.string.et_player_name_2) }
@@ -41,6 +45,7 @@ class StartGameFragment : BaseFragment() {
         binding.bStartGame.setOnClickListener {
             val gamerOne = binding.etFirstPlayer.text.defIfEmptyOrNull(defaultNameOne)
             val gamerTwo = binding.etSecondPlayer.text.defIfEmptyOrNull(defaultNameTwo)
+//            viewModel.setNameForGamer(gamerOne, gamerTwo)
 
             //Calling the SharedPreferences saving method
             savingNamesInSharedPref(gamerOne, gamerTwo)
