@@ -1,5 +1,6 @@
 package com.example.tabletennis.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,7 @@ class GameResultAdapter() :
                 result.date?.let {
                     val dateFormat = SimpleDateFormat("dd MMM, yy 'at' HH:mm")
                     date.text = dateFormat.format(it)
+                    // TODO: "Fix bug with time" 
                 }
                 scoreOne.text = result.firstPlayer.score.toString()
                 scoreTwo.text = result.secondPlayer.score.toString()

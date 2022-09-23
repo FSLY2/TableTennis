@@ -14,4 +14,18 @@
     <string name="alert_dialog_button_no">No</string>
     <string name="card_winner_title">Winner:</string>
     <string name="feed_ball_image">Feed Ball Image</string>
+    <string name="fab_content_desc">Menu button</string>
+    <string name="fab_close_content_desc">Close menu button</string>
+    <string name="fab_settings_content_desc">Settings button</string>
+    <string name="fab_result_content_desc">Result board button</string>
+    <string name="app_version">1.0.0</string>
+    <string name="developer">Розробка:</string>
+    <string name="developer_name">FOXYSLY</string>
+    <string name="about_app">AboutApp</string>
+    <string name="share_title">Поділитися</string>
+    <string name="share_button_title">Поділитися</string>
+    <string name="part_size_twenty_one">21</string>
+    <string name="part_size_eleven">11</string>
+    <string name="part_title">Партія до</string>
+    <string name="version_title">Версія:</string>
 </resources>
