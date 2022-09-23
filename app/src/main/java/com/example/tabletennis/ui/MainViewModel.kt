@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tabletennis.common.GameTime
 import com.example.tabletennis.common.PlayerNumber
 import com.example.tabletennis.data.repository.DatabaseRepository
+import com.example.tabletennis.data.repository.SettingsRepository
 import com.example.tabletennis.models.GameDetails
 import com.example.tabletennis.models.GameStatus
 import com.example.tabletennis.models.Players
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: DatabaseRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: DatabaseRepository, private val settingRepos: SettingsRepository) : ViewModel() {
 
     private var gameDetail: GameDetails? = null
     private var feedCounter: Int = 0
@@ -26,12 +27,13 @@ class MainViewModel @Inject constructor(private val repository: DatabaseReposito
     val gameStatus: LiveData<GameStatus>
         get() = gameStatusLiveData
 
+
     fun initGameDetails() {
         gameDetail = GameDetails(
             id = 0,
             firstPlayer = Players.First(),
             secondPlayer = Players.Second(),
-            finalScore = FINAL_SCORE
+            finalScore = settingRepos.finalScore
         )
         gameStatusLiveData.postValue(GameStatus.Init(gameDetail!!))
     }
@@ -58,7 +60,7 @@ class MainViewModel @Inject constructor(private val repository: DatabaseReposito
                 PlayerNumber.SECOND -> secondPlayer.apply { score = changeScore(event, score) }
             }
 
-            val anotherPlayerScore = when(updPlayer) {
+            val anotherPlayerScore = when (updPlayer) {
                 is Players.First -> secondPlayer.score
                 is Players.Second -> firstPlayer.score
             }
@@ -66,7 +68,7 @@ class MainViewModel @Inject constructor(private val repository: DatabaseReposito
             gameTime = getGameTime(updPlayer.score, anotherPlayerScore, finalScore)
 
             if (isFeed)
-            feed = changeFeed(playerNumber, gameTime.feed)
+                feed = changeFeed(playerNumber, gameTime.feed)
 
             val isRegularTimeWinner =
                 gameTime == GameTime.REGULAR_TIME && updPlayer.score == finalScore
@@ -118,5 +120,6 @@ class MainViewModel @Inject constructor(private val repository: DatabaseReposito
 
     companion object {
         private const val FINAL_SCORE = 11
+        private const val FINAL_SCORE_LONG_PART = 21
     }
 }

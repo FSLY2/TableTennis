@@ -50,4 +50,62 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.34" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabOpenMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/fab_content_desc"
+        android:clickable="true"
+        android:focusable="true"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_baseline_menu"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCloseMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/fab_close_content_desc"
+        android:src="@drawable/ic_baseline_close"
+        android:visibility="invisible"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="@string/fab_settings_content_desc"
+        android:src="@drawable/ic_baseline_settings"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fabOpenMenu"
+        app:layout_constraintEnd_toEndOf="@+id/fabOpenMenu"
+        app:layout_constraintStart_toStartOf="@+id/fabOpenMenu"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabResultBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="@string/fab_result_content_desc"
+        android:src="@drawable/ic_baseline_leaderboard"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/fabSettings"
+        app:layout_constraintStart_toStartOf="@id/fabSettings"
+        app:layout_constraintEnd_toEndOf="@id/fabSettings"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
