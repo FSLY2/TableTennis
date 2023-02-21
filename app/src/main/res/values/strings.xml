@@ -9,9 +9,13 @@
     <string name="button_start_new_game">Start new game</string>
     <string name="tv_winner_title">WINNER</string>
     <string name="alert_dialog_title">Exit</string>
-    <string name="alert_dialog_message">You are sure? If you exit, all game progress will be lost. Exit?</string>
+    <string name="alert_dialog_message">You are sure? If you exit, all game progress will
+        be lost. Exit?</string>
     <string name="alert_dialog_button_yes">Yes</string>
     <string name="alert_dialog_button_no">No</string>
+    <string name="permit_dialog_title">Permissions</string>
+    <string name="permit_dialog_message">App need your permission. Otherwise, we will not be
+        able take a picture and save it to the gallery. Do you want to allow permissions?</string>
     <string name="card_winner_title">Winner:</string>
     <string name="feed_ball_image">Feed Ball Image</string>
     <string name="fab_content_desc">Menu button</string>
@@ -28,4 +32,11 @@
     <string name="part_size_eleven">11</string>
     <string name="part_title">Партія до</string>
     <string name="version_title">Версія:</string>
+    <string name="camera">Camera</string>
+    <string name="image_from_gallery">Image from gallery</string>
+    <string name="photo_link">Photo link</string>
+    <string name="add">Add</string>
+    <string name="close">Close</string>
+    <string name="enter_url">Enter URL</string>
+    <string name="image_link">IMAGE LINK</string>
 </resources>

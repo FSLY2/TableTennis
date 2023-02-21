@@ -15,5 +15,7 @@ data class GameDetails(
     var winner: PlayerNumber? = null,
     var finalScore: Int = 0,
     var date: Date? = null,
-    var gameTime: GameTime = GameTime.REGULAR_TIME
+    var gameTime: GameTime = GameTime.REGULAR_TIME,
+    var firstPhotoPlayer: String = "",
+    var secondPhotoPlayer: String = ""
 ) : Parcelable

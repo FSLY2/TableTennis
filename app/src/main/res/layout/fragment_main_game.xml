@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainGameFragment">
+    tools:context=".ui.main.MainGameFragment"
+    android:background="@drawable/background_main">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -21,8 +21,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivFirstPlayer"
+        app:layout_constraintTop_toTopOf="@id/ivFirstPlayer"
         tools:text="Player 1" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -30,9 +30,9 @@
         style="@style/ScoreboardPlayerName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivSecondPlayer"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivSecondPlayer"
         tools:text="Player 2" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -40,10 +40,12 @@
         style="@style/ScoreboardScore"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFirstPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/ivFirstPlayer"
+        app:layout_constraintBottom_toTopOf="@id/bFirstUpScore"
         tools:text="10" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -51,79 +53,108 @@
         style="@style/ScoreboardScore"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tvSecondPlayerName"
+        app:layout_constraintTop_toBottomOf="@+id/ivSecondPlayer"
+        app:layout_constraintBottom_toTopOf="@id/bSecondUpScore"
         tools:text="11" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bFirstUpScore"
-        style="@style/ScoreboardButton"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_green_light"
+        style="@style/ScoreboardButtonUp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_circle_button"
         android:text="@string/buttonUp"
-        app:layout_constraintBottom_toTopOf="@+id/bFirstDownScore"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        android:textSize="26sp"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bFirstDownScore"
-        style="@style/ScoreboardButton"
+        style="@style/ScoreboardButtonDown"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_red_light"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_circle_button"
         android:text="@string/buttonDown"
+        android:textSize="13sp"
+        app:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/bFirstUpScore" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bSecondUpScore"
-        style="@style/ScoreboardButton"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_green_light"
+        style="@style/ScoreboardButtonUp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_circle_button"
         android:text="@string/buttonUp"
-        app:layout_constraintBottom_toTopOf="@+id/bSecondDownScore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        android:textSize="26sp"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bSecondDownScore"
-        style="@style/ScoreboardButton"
+        style="@style/ScoreboardButtonDown"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@android:color/holo_red_light"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_circle_button"
         android:text="@string/buttonDown"
+        android:textSize="13sp"
+        app:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintEnd_toStartOf="@id/bSecondUpScore" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivFeedOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/feed_ball_image"
         android:src="@drawable/ic_feed_circle"
         android:visibility="invisible"
-        android:contentDescription="@string/feed_ball_image"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/tvScorePlayerOne"
+        app:layout_constraintBottom_toTopOf="@id/tvScorePlayerOne"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFirstPlayerName" />
+        app:layout_constraintStart_toEndOf="@id/ivFirstPlayer"
+        app:layout_constraintTop_toBottomOf="@id/tvFirstPlayerName"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="128dp"
+        tools:visibility="visible" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivFeedTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/feed_ball_image"
         android:src="@drawable/ic_feed_circle"
         android:visibility="invisible"
-        android:contentDescription="@string/feed_ball_image"
-        tools:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/tvScorePlayerTwo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivSecondPlayer"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tvSecondPlayerName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSecondPlayerName"
+        tools:visibility="visible" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivFirstPlayer"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/add_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivSecondPlayer"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/add_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

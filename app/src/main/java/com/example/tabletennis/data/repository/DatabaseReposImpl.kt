@@ -36,6 +36,8 @@ class DatabaseReposImpl @Inject constructor(private val dataBaseDao: DatabaseDao
                 pNameTwo = secondPlayer.pName,
                 pScoreOne = firstPlayer.score,
                 pScoreTwo = secondPlayer.score,
+                pPhotoOne = firstPlayer.photo.toString(),
+                pPhotoTwo = secondPlayer.photo.toString(),
                 winner = when (winner) {
                     PlayerNumber.FIRST -> firstPlayer.pName
                     PlayerNumber.SECOND -> secondPlayer.pName

@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tabletennis.databinding.FragmentSettingsGameBinding
 import com.example.tabletennis.ui.BaseFragment
-import com.example.tabletennis.ui.MainViewModel
-import com.example.tabletennis.ui.StartGameFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,7 +67,7 @@ class SettingsGameFragment: BaseFragment() {
             val text = "You can download this app the following link"
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
-            shareIntent.type = "text"
+            shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_TEXT, text)
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "https://google.com/")
             startActivity(Intent.createChooser(shareIntent, "Share via"))

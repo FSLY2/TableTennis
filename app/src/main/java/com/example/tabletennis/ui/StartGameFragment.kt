@@ -1,18 +1,24 @@
 package com.example.tabletennis.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.tabletennis.R
-import com.example.tabletennis.databinding.FragmentStartGameBinding
+import com.example.tabletennis.common.PlayerNumber
 import com.example.tabletennis.common.Preferences
 import com.example.tabletennis.common.defIfEmptyOrNull
+import com.example.tabletennis.databinding.FragmentStartGameBinding
+import com.example.tabletennis.ui.main.MainViewModel
+import com.example.tabletennis.ui.sheets.BottomSheetMenu
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,23 +31,30 @@ class StartGameFragment : BaseFragment() {
     private lateinit var fabSettings: FloatingActionButton
     private lateinit var fabResultBoard: FloatingActionButton
 
+    //Implement DatabaseViewModel
+    private val viewModel: MainViewModel by viewModels()
+
     //Initializing animations for FloatingActionsButtons
-    private val animFromBottom: Animation by lazy { AnimationUtils.loadAnimation(
+    private val animFromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
             requireContext(),
             R.anim.fab_from_bottom
         )
     }
-    private val animToBottom: Animation by lazy { AnimationUtils.loadAnimation(
+    private val animToBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
             requireContext(),
             R.anim.fab_to_bottom
         )
     }
-    private val animRotateOpen: Animation by lazy { AnimationUtils.loadAnimation(
+    private val animRotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
             requireContext(),
             R.anim.rotate_open
         )
     }
-    private val animRotateClose: Animation by lazy { AnimationUtils.loadAnimation(
+    private val animRotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
             requireContext(),
             R.anim.rotate_close
         )
@@ -62,11 +75,11 @@ class StartGameFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fabOpenMenu = binding.fabOpenMenu
-        fabSettings = binding.fabSettings
-        fabResultBoard = binding.fabResultBoard
+        viewModel.initGameDetails()
+        initFabButtons()
         startGame()
         initMenuButtonListeners()
+        setPhoto()
     }
 
     override fun onResume() {
@@ -120,6 +133,12 @@ class StartGameFragment : BaseFragment() {
         }
     }
 
+    private fun initFabButtons() {
+        fabOpenMenu = binding.fabOpenMenu
+        fabSettings = binding.fabSettings
+        fabResultBoard = binding.fabResultBoard
+    }
+
     //Initializing animation for FloatingActionsButtons
     private fun onOpenButtonClicked() {
         setVisibility(clicked)
@@ -163,8 +182,36 @@ class StartGameFragment : BaseFragment() {
         }
     }
 
-    // TODO: "Change FAB color"
     // TODO: "Remove one FAB button from XML"
+
+    //Initialization add photo buttons, invoke camera and gallery function
+    private fun setPhoto() {
+        binding.apply {
+            var imageStringTest: String?
+            ivFirstPlayer.setOnClickListener {
+                imageStringTest = showBottomSheet(ivFirstPlayer)
+//                viewModel.setPhoto(PlayerNumber.FIRST, imageStringTest)
+                Log.d("TestImageSave", "1. Saved: $imageStringTest")
+            }
+
+            ivSecondPlayer.setOnClickListener {
+                imageStringTest = showBottomSheet(ivSecondPlayer)
+//                viewModel.setPhoto(PlayerNumber.SECOND, imageStringTest)
+                Log.d("TestImageSave", "2. Saved: $imageStringTest")
+            }
+        }
+    }
+
+    private fun showBottomSheet(player: ShapeableImageView): String? {
+        var imageString: String? = null
+        val menuFragment = BottomSheetMenu { image ->
+            Glide.with(requireContext()).load(image).circleCrop().into(player)
+            imageString = image.toString()
+        }
+        menuFragment.show(parentFragmentManager, "menu_Fragment")
+        Log.d("TestImageSave", "3. Saved: $imageString")
+        return imageString
+    }
 
     companion object {
         private const val PREF_GAMER_ONE_KEY = "gamer_one"

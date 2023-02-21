@@ -14,5 +14,7 @@ data class ScoreDbEntity(
     val pNameTwo: String,
     val pScoreOne: Int,
     val pScoreTwo: Int,
-    val winner: String?
+    val winner: String?,
+    var pPhotoOne: String,
+    var pPhotoTwo: String
 )

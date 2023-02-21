@@ -1,4 +1,4 @@
-package com.example.tabletennis.ui
+package com.example.tabletennis.ui.main
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -17,6 +17,7 @@ import com.example.tabletennis.databinding.FragmentMainGameBinding
 import com.example.tabletennis.models.GameStatus
 import com.example.tabletennis.models.Players
 import com.example.tabletennis.models.ScoreEvent
+import com.example.tabletennis.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,8 +80,10 @@ class MainGameFragment : BaseFragment() {
                 //Saving results and transition to FinishGameFragment
                 is GameStatus.Finish -> {
                     viewModel.saveGame(status.gameDetail)
-                    val action = MainGameFragmentDirections
-                        .actionMainGameFragmentToFinishGameFragment(status.gameDetail)
+                    val action =
+                        MainGameFragmentDirections.actionMainGameFragmentToFinishGameFragment(
+                            status.gameDetail
+                        )
                     findNavController().navigate(action)
                 }
                 is GameStatus.Cancel -> {

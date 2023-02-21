@@ -1,4 +1,4 @@
-package com.example.tabletennis.ui
+package com.example.tabletennis.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -49,6 +49,15 @@ class MainViewModel @Inject constructor(private val repository: DatabaseReposito
         gameDetail?.let { gameDetail ->
             firstPlayerName?.let { gameDetail.firstPlayer.pName = it }
             secondPlayerName?.let { gameDetail.secondPlayer.pName = it }
+        }
+    }
+
+    fun setPhoto(playerNumber: PlayerNumber, photoPlayer: String?) {
+        gameDetail?.apply {
+            val updPlayers: Players = when (playerNumber) {
+                PlayerNumber.FIRST -> firstPlayer.apply { photo = photoPlayer }
+                PlayerNumber.SECOND -> secondPlayer.apply { photo = photoPlayer }
+            }
         }
     }
 

@@ -19,10 +19,13 @@
         <action
             android:id="@+id/action_startGameFragment_to_resultGameFragment"
             app:destination="@id/resultGameFragment" />
+        <action
+            android:id="@+id/action_startGameFragment_to_bottomSheetMenu"
+            app:destination="@id/bottomSheetMenu" />
     </fragment>
     <fragment
         android:id="@+id/mainGameFragment"
-        android:name="com.example.tabletennis.ui.MainGameFragment"
+        android:name="com.example.tabletennis.ui.main.MainGameFragment"
         android:label="fragment_main_game"
         tools:layout="@layout/fragment_main_game" >
         <argument
@@ -74,4 +77,18 @@
             app:popUpTo="@id/settingsGameFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetMenu"
+        android:name="com.example.tabletennis.ui.sheets.BottomSheetMenu"
+        android:label="bottom_sheet_menu_layout"
+        tools:layout="@layout/bottom_sheet_menu_layout" >
+        <action
+            android:id="@+id/action_bottomSheetMenu_to_bottomSheetUrl"
+            app:destination="@id/bottomSheetUrl" />
+    </dialog>
+    <dialog
+        android:id="@+id/bottomSheetUrl"
+        android:name="com.example.tabletennis.ui.sheets.BottomSheetUrl"
+        android:label="bottom_sheet_url_layout"
+        tools:layout="@layout/bottom_sheet_url_layout" />
 </navigation>

@@ -1,7 +1,9 @@
 package com.example.tabletennis.common
 
+import android.content.ContentValues
 import android.text.Editable
 import android.view.View
+import java.io.File
 
 fun Editable?.defIfEmptyOrNull(default: String): String =
     if (this == null || this.toString().isEmpty()) default
@@ -26,3 +28,5 @@ fun View.changeVisibility(visible: Boolean?) {
         null -> View.GONE
     }
 }
+
+fun ContentValues.put(relativePath: String, externalStorageDirectory: File?) {}

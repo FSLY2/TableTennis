@@ -1,111 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.StartGameFragment">
+    tools:context=".ui.StartGameFragment"
+    android:background="@drawable/background_main">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etFirstPlayer"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:hint="@string/et_player_name_1"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/startGuideLine" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFirstPlayer"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:autofillHints="name"
+            android:background="@color/bg_blue"
+            android:backgroundTint="@color/bg_blue"
+            android:gravity="center"
+            android:hint="@string/et_player_name_1"
+            android:inputType="text"
+            android:maxLength="12"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/ivFirstPlayer"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/ivFirstPlayer"
+            app:layout_constraintTop_toBottomOf="@+id/ivFirstPlayer" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etSecondPlayer"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:hint="@string/et_player_name_2"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFirstPlayer" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSecondPlayer"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:autofillHints="name"
+            android:background="@color/bg_blue"
+            android:backgroundTint="@color/bg_blue"
+            android:gravity="center"
+            android:hint="@string/et_player_name_2"
+            android:inputType="text"
+            android:maxLength="12"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/ivSecondPlayer"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/ivSecondPlayer"
+            app:layout_constraintTop_toBottomOf="@+id/ivSecondPlayer" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bStartGame"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:text="@string/b_start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSecondPlayer"
-        app:layout_constraintVertical_bias="0.0" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bStartGame"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/b_start"
+            android:background="@drawable/bg_button"
+            app:backgroundTint="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSecondPlayer"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/startGuideLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabOpenMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/fab_content_desc"
-        android:clickable="true"
-        android:focusable="true"
-        android:tint="@android:color/white"
-        android:src="@drawable/ic_baseline_menu"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glVerticalLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabCloseMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/fab_close_content_desc"
-        android:src="@drawable/ic_baseline_close"
-        android:visibility="invisible"
-        app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glVerticalRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:contentDescription="@string/fab_settings_content_desc"
-        android:src="@drawable/ic_baseline_settings"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/fabOpenMenu"
-        app:layout_constraintEnd_toEndOf="@+id/fabOpenMenu"
-        app:layout_constraintStart_toStartOf="@+id/fabOpenMenu"
-        tools:visibility="visible" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabOpenMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/button_blue"
+            android:clickable="true"
+            android:contentDescription="@string/fab_content_desc"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_add"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabResultBoard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:contentDescription="@string/fab_result_content_desc"
-        android:src="@drawable/ic_baseline_leaderboard"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="invisible"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/fabSettings"
-        app:layout_constraintStart_toStartOf="@id/fabSettings"
-        app:layout_constraintEnd_toEndOf="@id/fabSettings"
-        tools:visibility="visible" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCloseMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/fab_close_content_desc"
+            android:src="@drawable/ic_baseline_close"
+            android:visibility="invisible"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/button_blue"
+            android:clickable="true"
+            android:contentDescription="@string/fab_settings_content_desc"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_settings"
+            android:visibility="invisible"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/fabOpenMenu"
+            app:layout_constraintEnd_toEndOf="@+id/fabOpenMenu"
+            app:layout_constraintStart_toStartOf="@+id/fabOpenMenu"
+            tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabResultBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="@color/button_blue"
+            android:clickable="true"
+            android:contentDescription="@string/fab_result_content_desc"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_leaderboard"
+            android:visibility="invisible"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/fabSettings"
+            app:layout_constraintEnd_toEndOf="@id/fabSettings"
+            app:layout_constraintStart_toStartOf="@id/fabSettings"
+            tools:visibility="visible" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivFirstPlayer"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:src="@drawable/add_photo"
+            app:layout_constraintStart_toStartOf="@id/glVerticalLeft"
+            app:layout_constraintTop_toTopOf="@id/glHorizontal" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivSecondPlayer"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:src="@drawable/add_photo"
+            app:layout_constraintEnd_toStartOf="@id/glVerticalRight"
+            app:layout_constraintTop_toTopOf="@id/glHorizontal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
